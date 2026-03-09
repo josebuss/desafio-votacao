@@ -15,11 +15,11 @@ import br.com.desafiovotacao.entity.SessaoVotacaoEntity;
 public interface SessaoVotacaoRepository extends JpaRepository<SessaoVotacaoEntity, UUID> {
 
 	@Query("select s from SessaoVotacaoEntity s" + //
-			" where s.pauta.id = :pautaId" + //
+			" where (:pautaId is null or s.pauta.id = :pautaId) " + //
 			" and (CAST(:ativa AS boolean) is null " + //
-			" or (:ativa = true and s.fim >= :now)" + //
-			" or (:ativa = false and s.fim < :now))" + //
-			" order by s.inicio")
+			" or (:ativa = true and s.fim >= :now) " + //
+			" or (:ativa = false and s.fim < :now)) " + //
+			" order by s.inicio ")
 	Page<SessaoVotacaoEntity> findByPautaIdAndAtiva(@Param("pautaId") UUID pautaId, @Param("ativa") Boolean ativa,
 			@Param("now") LocalDateTime now, Pageable pageable);
 	

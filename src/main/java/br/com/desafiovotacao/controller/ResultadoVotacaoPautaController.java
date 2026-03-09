@@ -24,7 +24,7 @@ public class ResultadoVotacaoPautaController {
 	@Operation(summary = "Listar resultado votação", description = "Lista o resultado da sessão de votação de uma ou mais pautas")
 	@GetMapping
 	public ResponseEntity<List<ResultadoVotacaoPautaDTO>> listar(@RequestParam(defaultValue = "0") int offset,
-			@RequestParam(defaultValue = "10") int size, @RequestParam UUID pautaId) {
+			@RequestParam(defaultValue = "10") int size, @RequestParam(required = false) UUID pautaId) {
 		return ResponseEntity.ok(service.listar(offset, size, pautaId));
 	}
 	

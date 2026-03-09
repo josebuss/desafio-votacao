@@ -36,7 +36,7 @@ public class SessaoVotacaoController {
 	@Operation(summary = "Listar sessões", description = "Lista as sessões ativas/inativas para uma pauta")
 	@GetMapping
 	public ResponseEntity<List<SessaoVotacaoDTO>> listar(@RequestParam(defaultValue = "0") int offset,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(required = true) UUID pautaId,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(required = false) UUID pautaId,
 			@RequestParam(required = false) Boolean ativa) {
 		return ResponseEntity.ok(service.listar(offset, size, pautaId, ativa));
 	}
